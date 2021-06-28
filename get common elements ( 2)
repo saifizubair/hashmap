@@ -1,0 +1,36 @@
+package com.company;
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+public class Main {
+
+    public static void getcommonelement(int arr1[],int arr2[]){
+        HashMap<Integer,Integer>fmap =new HashMap<>();
+        for (int arr :arr1){
+            if (fmap.containsKey(arr)){
+                int of= fmap.get(arr);
+                 int nf =of+1;
+                 fmap.put(arr,nf);
+            }
+            else {
+                fmap.put(arr,1);
+            }
+        }
+      for (int val :arr2){
+          if (fmap.containsKey(val)&&fmap.get(val)>0){
+              System.out.print(val+" ");
+              int of =fmap.get(val);
+              int nf =of-1;
+              fmap.put(val,nf);
+          }
+      }
+    }
+    public static void main(String[] args) {
+
+        int arr1[]={1,1,2,2,2,3,5};
+        int arr2[]={1,1,1,2,2,4,5};
+        getcommonelement(arr1,arr2);
+    }
+}
