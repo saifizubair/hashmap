@@ -1,0 +1,64 @@
+package com.company;
+
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[]args){
+        abc p =new abc();
+        p.add(10);
+        p.add(20);
+        p.add(30);
+        p.add(40);
+        p.add(50);
+        int pk =p.peek();
+        int rem =p.remove();
+        System.out.println(rem);
+        System.out.println(rem);
+    }
+}
+class abc{
+    PriorityQueue<Integer>left =new PriorityQueue<>(Collections.reverseOrder());
+    PriorityQueue<Integer>right =new PriorityQueue<>();
+    public void add(int val){
+        if (right.size()>0&&val>right.peek()){
+            right.add(val);
+        }
+        else {
+            left.add(val);
+        }
+        if (left.size()-right.size()==2){
+            right.add(left.remove());
+        }
+        else if (right.size()-left.size()==2){
+            left.add(right.remove());
+        }
+    }
+    public int remove(){
+        if (this.size()==0){
+            System.out.print("underflow");
+            return -1;
+        }
+        else if (left.size()>= right.size()){
+            return left.remove();
+        }
+        else
+            return right.remove();
+    }
+    public int peek(){
+        if (this.size()==0){
+            System.out.print("underflow");
+            return -1;
+        }
+        else if (left.size()>=right.size()){
+            return left.peek();
+        }
+        else
+        return right.peek();
+    }
+    public int size(){
+        return left.size()+right.size();
+    }
+}
